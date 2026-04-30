@@ -1,0 +1,66 @@
+<%- include('_header') %>
+
+<h1>Generated Plan</h1>
+
+<% if (typeof runs !== "undefined" && runs.length > 0) { %>
+  <form method="get" action="/plan">
+    <label for="tag">Select a run:</label>
+    <select name="tag" id="tag" onchange="this.form.submit()">
+      <% runs.forEach((run) => { %>
+        <option value="<%= run.run_tag %>" <%= run.run_tag === selectedTag ? "selected" : "" %>>
+          <%= run.run_tag %>
+        </option>
+      <% }) %>
+    </select>
+  </form>
+<% } %>
+
+<% if (empty) { %>
+  <div class="warning">
+    No plan has been generated yet. Run <code>npm run solve</code> first.
+  </div>
+<% } else { %>
+  <p>
+    The solver assigned <%= semesters.length %> semesters. Review the plan
+    below — if any course appears before a course it depends on, there is a bug
+    in the pipeline.
+  </p>
+
+  <!-- Task 7 Option B: if the route passes a `warnings` array, display
+       a .warning block here for each issue found in the plan. -->
+
+  <% for (const sem of semesters) { %>
+  <div class="semester-block">
+    <div class="semester-header">
+      <h2>Semester <%= sem.number %></h2>
+      <span class="credits-badge"><%= sem.totalCredits %> / 16 credits</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Dept</th><th>Credits</th><th>Prerequisites</th></tr>
+      </thead>
+      <tbody>
+        <% for (const course of sem.courses) { %>
+        <tr class="dept-<%= course.department %>">
+          <td><code><%= course.course_id %></code></td>
+          <td><%= course.name %></td>
+          <td><span class="dept-badge <%= course.department %>"><%= course.department %></span></td>
+          <td><%= course.credits %></td>
+          <td>
+            <% if (course.prereqs && course.prereqs.length > 0) { %>
+              <% for (const p of course.prereqs) { %>
+                <span class="tag"><%= p %></span>
+              <% } %>
+            <% } else { %>
+              <span class="empty">none</span>
+            <% } %>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+<% } %>
+
+<%- include('_footer') %>

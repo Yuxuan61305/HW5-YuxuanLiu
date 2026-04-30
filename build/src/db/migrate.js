@@ -1,0 +1,10 @@
+import Database from "better-sqlite3";
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const schema = readFileSync(resolve(__dirname, "schema.sql"), "utf-8");
+const db = new Database(resolve("db.sqlite"));
+db.exec(schema);
+db.close();
+console.log("Database initialized from schema.sql");

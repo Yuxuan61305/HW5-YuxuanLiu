@@ -1,0 +1,68 @@
+<%- include('_header') %>
+
+<h1>Course Catalog</h1>
+<p><%= courses.length %> courses available across all departments.</p>
+
+<!-- Task 7 Option A: wire up this input to filter the table rows as the user types -->
+<input
+  type="text"
+  id="course-search"
+  placeholder="Search by department, course number/id,..."
+  style="margin-bottom:1rem; padding:0.4rem 0.6rem; width:100%; border:1px solid #ccc; border-radius:4px; font-size:1rem;"
+/>
+
+<table id = "courseTable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Dept</th>
+      <th>Credits</th>
+      <th>Prerequisites</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (const course of courses) { %>
+    <tr class="dept-<%= course.department %>">
+      <td><code><%= course.id %></code></td>
+      <td><%= course.name %></td>
+      <td><span class="dept-badge <%= course.department %>"><%= course.department %></span></td>
+      <td><%= course.credits %></td>
+      <td>
+        <% if (course.prereqs.length) { %>
+          <% for (const p of course.prereqs) { %>
+            <span class="tag"><%= p.id %></span>
+          <% } %>
+        <% } else { %>
+          <span class="empty">none</span>
+        <% } %>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<script>
+  // Task 7 Option A: filter table rows as the user types.
+  // Hint: listen for "input" events on #course-search, then show or hide
+  // <tr> elements whose text content matches the query string.
+  const input = document.getElementById("course-search");
+  const rows = document.querySelectorAll("#courseTable tbody tr");
+
+  if (input instanceof HTMLInputElement) {
+    input.addEventListener("input", () => {
+      const query = input.value.trim().toLowerCase();
+
+      rows.forEach((row) => {
+        const searchableText = Array.from(row.querySelectorAll("td"))
+          .slice(0, 3)
+          .map((cell) => (cell.textContent ?? "").toLowerCase())
+          .join(" ");
+
+        row.style.display = searchableText.includes(query) ? "" : "none";
+      });
+    });
+  }
+</script>
+
+<%- include('_footer') %>

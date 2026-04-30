@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> — Course Planner</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; line-height: 1.5; }
+    nav { display: flex; gap: 1.5rem; margin-bottom: 2rem; border-bottom: 2px solid #0066cc; padding-bottom: 0.75rem; }
+    nav a { text-decoration: none; color: #0066cc; font-weight: 500; transition: color 0.2s; }
+    nav a:hover { color: #004999; text-decoration: underline; }
+    h1 { margin-top: 0; color: #111; }
+    h2 { border-bottom: 1px solid #eee; padding-bottom: 0.25rem; color: #333; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 1.5rem; }
+    th, td { text-align: left; padding: 0.5rem 0.75rem; border: 1px solid #ddd; }
+    th { background: #f8f9fa; font-weight: 600; }
+    .tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.8rem; background: #e8f0fe; color: #1a56db; margin-right: 0.25rem; font-family: 'Courier New', monospace; }
+    .semester-block { border: 2px solid #dee2e6; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .semester-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .semester-header h2 { margin: 0; border: none; }
+    .credits-badge { background: #e7f5ff; border: 1px solid #74c0fc; border-radius: 4px; padding: 0.25rem 0.7rem; font-size: 0.85rem; font-weight: 600; color: #1864ab; }
+    .warning { background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; padding: 0.75rem 1rem; margin-bottom: 1rem; }
+    .empty { color: #666; font-style: italic; }
+    /* Department color coding */
+    .dept-COSI { background-color: #d0e8ff; }
+    .dept-MATH { background-color: #ffe3e3; }
+    .dept-badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.75rem; font-weight: 600; }
+    .dept-badge.COSI { background: #1971c2; color: white; }
+    .dept-badge.MATH { background: #c92a2a; color: white; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/courses">Courses</a>
+    <a href="/plan">Plan</a>
+    <a href = "/stats">Stats</a>
+    <!-- Task 5: add a link to /stats here -->
+    <!-- Task 7 Option C: add a link to /graph here -->
+  </nav>

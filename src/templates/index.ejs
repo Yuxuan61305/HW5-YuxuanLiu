@@ -1,0 +1,33 @@
+<%- include('_header') %>
+
+<h1>Course Planner</h1>
+
+<p>
+  This tool automatically generates a four-semester course plan that satisfies
+  all prerequisite requirements and credit limits. It uses
+  <strong>SQL</strong> to retrieve course data, <strong>Z3</strong> (a
+  constraint solver) to find a valid assignment of courses to semesters, and
+  <strong>server-side templates</strong> to render the result.
+</p>
+
+<p>
+  The system currently has intentional bugs that produce an incorrect plan.
+  Your job is to find and fix them.
+</p>
+
+<h2>Pipeline</h2>
+<ol>
+  <li><code>npm run db:init</code> — create the SQLite schema</li>
+  <li><code>npm run db:seed</code> — populate courses and prerequisites</li>
+  <li><code>npm run solve</code> — run the constraint solver, write plan to DB</li>
+  <li><code>npm start</code> — serve this interface</li>
+</ol>
+
+<h2>Navigate</h2>
+<ul>
+  <li><a href="/courses">Course Catalog</a> — all courses with prerequisites</li>
+  <li><a href="/plan">Generated Plan</a> — the solver's output, semester by semester</li>
+  <li><a href="/graph">Prerequisite Graph</a> — visualize course dependencies</li>
+</ul>
+
+<%- include('_footer') %>

@@ -1,0 +1,79 @@
+<%- include('_header') %>
+
+<h1>Plan Statistics</h1>
+
+<h2>Credits Semester</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Semester</th>
+      <th>Total Credits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (const row of creditsPerSemester) { %>
+      <tr>
+        <td><%= row.semester %></td>
+        <td><%= row.total_credits %></td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+<h2>Credits per Department</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Department</th>
+      <th>Course Number</th>
+      <th>Total Credits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (const row of coursesPerDept) { %>
+      <tr>
+        <td><span class="dept-badge <%= row.department %>"><%= row.department %></span></td>
+        <td><%= row.course_count %></td>
+        <td><%= row.total_credits %></td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+<h2>Busiest Semester</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semester</th>
+      <th>Total Credits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (busiestSemester) { %>
+      <tr>
+        <td><%= busiestSemester.semester %></td>
+        <td><%= busiestSemester.total_credits %></td>
+      </tr>
+    <% } else { %>
+      <tr>
+        <td colspan="2">No data available</td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<h2>Average Credits per Semester</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Average Credits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= avgCreditsPerSemester %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%- include('_footer') %>
